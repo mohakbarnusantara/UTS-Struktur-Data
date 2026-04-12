@@ -120,6 +120,74 @@ class AntrianRumahSakit {
 };
 
 int main(){
+    AntrianRumahSakit rs_Undata;
+    int pilihan, idCari;
+    string namaIn, keluhanIn;
+    system("cls");
+
+    do{
+        cout << "\nSISTEM ANTRIAN RUMAH SAKIT\n";
+        cout << "1. Tambah Pasien\n";
+        cout << "2. Hapus Pasien (ID)\n";
+        cout << "3. Update Pasien (ID)\n";
+        cout << "4. Tampilkan Antrian\n";
+        cout << "5. Keluar\n";
+        cout << "Pilih: ";
+        cin >> pilihan;
+        cin.ignore();
+
+        switch (pilihan){
+        case 1:
+            system("cls");
+            cout << "Nama :"; getline(cin, namaIn);
+            cout << "Keluhan :"; getline(cin, keluhanIn);
+            rs_Undata.tambahPasien(namaIn,keluhanIn);
+            break;
+        
+        case 2:
+            system("cls");
+            cout << "Masukkan ID pasien yang akan dihapus: ";
+            cin >> idCari;
+            rs_Undata.hapusPasien(idCari);
+            break;
+        
+        case 3:
+            system("cls");
+            cout << "Masukkan ID pasien yang akan diUpdate: ";
+            cin >> idCari;
+            cin.ignore();
+
+            int pilihanUP;
+            
+            cout << "Pilih (1-3)" << endl;
+            cout << "1. Ubah Nama" << endl;
+            cout << "2. Ubah Keluhan" << endl;
+            cout << "3. Ubah Nama dan Keluhan" << endl;
+            cout << "Pilih: ";
+            cin >> pilihanUP;
+            cin.ignore();
+
+            switch (pilihanUP){
+            case 1:
+                cout << "Nama baru : "; getline(cin, namaIn);
+                break;
+            
+            default:
+                break;
+            }
+            
+            break;
+        
+            case 4:
+            system("cls");
+             rs_Undata.tampilkanData();
+            break;
+        default:
+            system("cls");
+            cout << "Pilihan Tidak Valid!\nSilakan Pilih (1-5)" << endl;
+            break;
+        }
+    } while (pilihan != 5);
     
 }
 
