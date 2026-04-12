@@ -70,6 +70,7 @@ class AntrianRumahSakit {
             }
         }
         // 3.update data
+        // overloading
         void updatePasien(int id,string namaBaru, string keluhanBaru){
             if(namaBaru.empty()){
                 cout << "Gagal memperbaharui data pasien!\n";
@@ -84,6 +85,29 @@ class AntrianRumahSakit {
                     if(daftarAntrian[i].id == id){
                         daftarAntrian[i].nama == namaBaru;
                         daftarAntrian[i].keluhan == keluhanBaru;
+                        cout << "Data Pasien berhasil diperbaharui!\n";
+                        system("pause");
+                        system("cls");
+                        return;
+                    }else{
+                        cout << "ID pasien tidak di ditemukan.\n";
+                        system("pause");
+                        system("cls");
+                    }
+                }
+            }
+        }
+        // overloading update nama
+        void updatePasien(int id,string namaBaru){
+            if(namaBaru.empty()){
+                cout << "Gagal memperbaharui data pasien!\n";
+                system("pause");
+                system("cls");
+            
+            }else{
+                for(int i =1; i < jumlahData; i++){
+                    if(daftarAntrian[i].id == id){
+                        daftarAntrian[i].nama == namaBaru;
                         cout << "Data Pasien berhasil diperbaharui!\n";
                         system("pause");
                         system("cls");
