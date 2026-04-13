@@ -243,6 +243,11 @@ system("cls");
             system("cls");
                 rs.tampilkanData();
                 break;
+            case 5:
+                system("cls");
+                cout << "Terima Kasih!\n";
+                return 0;
+            break;
             default:
             system("cls");
             cout << "Pilihan Tidak Valid!\nSilakan Pilih (1-5)" << endl;
