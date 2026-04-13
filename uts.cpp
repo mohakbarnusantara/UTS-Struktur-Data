@@ -122,12 +122,10 @@ public:
                 system("cls");
                 return;
             }
-            else {
-                cout << "ID pasien tidak ditemukan.\n";
-                system("pause");
-                    system("cls");
-                }
-            
+            cout << "ID pasien tidak ditemukan.\n";
+            system("pause");
+            system("cls");
+                
         }
     }
 }
