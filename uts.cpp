@@ -80,15 +80,12 @@ public:
     // 3. Update Data
     // overloding updatePasien untuk update nama dan keluhan
     void updatePasien(int id, string namaBaru, string keluhanBaru) {
-        if (namaBaru.empty()){
-            cout << "gagal memperbaharui data pasien!\n";
-            system("pause");
-            system("cls");
-        }  else if(keluhanBaru.empty()){
-            cout << "gagal memperbaharui data pasien!\n";
-            system("pause");
-            system("cls");
-        }else{
+        if (namaBaru.empty() || keluhanBaru.empty()){
+        cout << "gagal memperbaharui data pasien!\n";
+        system("pause");
+        system("cls");
+        }
+
         for (int i = 0; i < jumlahData; i++) {
             if (daftarAntrian[i].id == id) {
                 daftarAntrian[i].nama = namaBaru;
@@ -97,15 +94,8 @@ public:
                 system("pause");
                 system("cls");
                 return;
-            }
-            else {
-                cout << "ID pasien tidak ditemukan.\n";
-                system("pause");
-                    system("cls");
                 }
-            
-        }
-    }
+            }    
 }
         // overloading updatePasien untuk update nama
     void updatePasien(int id, string namaBaru) {
@@ -121,11 +111,7 @@ public:
                 system("pause");
                 system("cls");
                 return;
-            }
-            cout << "ID pasien tidak ditemukan.\n";
-            system("pause");
-            system("cls");
-                
+            }   
         }
     }
 }
@@ -144,12 +130,6 @@ public:
                 system("cls");
                 return;
             }
-            else {
-                cout << "ID pasien tidak ditemukan.\n";
-                system("pause");
-                    system("cls");
-                }
-            
         }
     }
 }
@@ -172,6 +152,16 @@ public:
         cout << "====================================\n";
         system("pause");
         system("cls");
+    }
+
+    // Fungsi baru untuk validasi keberadaan ID
+    int cariIndeksPasien(int id) {
+        for (int i = 0; i < jumlahData; i++) {
+            if (daftarAntrian[i].id == id) {
+                return i; // Mengembalikan indeks array
+            }
+        }
+        return -1; // Tidak ditemukan
     }
 };
 
@@ -208,36 +198,51 @@ system("cls");
                 cout << "Masukkan ID yang akan diupdate: "; 
                 cin >> idCari;
                 cin.ignore();
-                do{
-                    cout << "Pilih (1-3)" << endl;
-                    cout << "1. Ubah Nama" << endl;
-                    cout << "2. Ubah Keluhan" << endl;
-                    cout << "3. Ubah Nama dan Keluhan" << endl;
-                    cout << "Pilih: "; cin >> pilihan;
-                    cin.ignore();
-                    switch (pilihan) {
-                        case 1:
-                            system("cls");
-                            cout << "Nama Baru: "; getline(cin, namaIn);
-                            rs.updatePasien(idCari, namaIn);
-                        break;
-                        case 2:
-                            system("cls");
-                            cout << "Keluhan Baru: "; getline(cin, keluhanIn);
-                            rs.updatePasienKeluhan(idCari, keluhanIn);
-                        break;
-                        case 3:
-                            system("cls");
-                            cout << "Nama Baru: "; getline(cin, namaIn);
-                            cout << "Keluhan Baru: "; getline(cin, keluhanIn);
-                            rs.updatePasien(idCari, namaIn, keluhanIn);
-                        break;
-                        default:
-                            system("cls");
-                            cout << "Pilihan Tidak Valid!\nSilakan Pilih (1-5)" << endl;
-                        break;
-                    }
-                } while (pilihan <1 || pilihan > 3);
+                
+                int indexDitemukan;
+                indexDitemukan = rs.cariIndeksPasien(idCari);
+
+                if(indexDitemukan == -1){
+                    cout << "ID pasien " << idCari << " tidak ditemukan!\n";
+                    system("pause");
+                    system("cls");
+                }else{
+                    int pilihanUpdate;
+                    do{
+                        cout << "\nID Ditemukan! Pasien: " << idCari << endl;
+                        cout << "Pilih (1-3)" << endl;
+                        cout << "1. Ubah Nama" << endl;
+                        cout << "2. Ubah Keluhan" << endl;
+                        cout << "3. Ubah Nama dan Keluhan" << endl;
+                        cout << "Pilih: "; cin >> pilihanUpdate;
+                        cin.ignore();
+                        switch (pilihanUpdate) {
+                            case 1:
+                                system("cls");
+                                cout << "Nama Baru: "; getline(cin, namaIn);
+                                rs.updatePasien(idCari, namaIn);
+                            break;
+                            case 2:
+                                system("cls");
+                                cout << "Keluhan Baru: "; getline(cin, keluhanIn);
+                                rs.updatePasienKeluhan(idCari, keluhanIn);
+                            break;
+                            case 3:
+                                system("cls");
+                                cout << "Nama Baru: "; getline(cin, namaIn);
+                                cout << "Keluhan Baru: "; getline(cin, keluhanIn);
+                                rs.updatePasien(idCari, namaIn, keluhanIn);
+                            break;
+                            default:
+                                system("cls");
+                                cout << "Pilihan Tidak Valid!\nSilakan Pilih (1-3)" << endl;
+                                system("pause");
+                                system("cls");
+                            break;
+                        }
+                    } while (pilihanUpdate <1 || pilihanUpdate > 3);
+
+                }
                 break;
             case 4:
             system("cls");
